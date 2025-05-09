@@ -1,19 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pay Day - Invoice Generator</title>
+  <title>Pay Day – Invoice Generator</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    fieldset { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: .5rem; }
+  </style>
 </head>
 <body>
-  <h2>Pay Day - Invoice Generator</h2>
+  <h1>Pay Day – Invoice Generator</h1>
   <form action="/" method="post">
     <fieldset>
       <legend>Your Info</legend>
-      <label>Your Name <input type="text" name="sender_name" required></label>
-      <label>Your Email <input type="email" name="sender_email" required></label>
+      <label>Your Name:
+        <input type="text" name="sender_name" required>
+      </label>
+      <label>Your Email:
+        <input type="email" name="sender_email" required>
+      </label>
     </fieldset>
-    <!-- Client Info, Items, Footer... (see full form.html from ZIP) -->
-    <button type="submit">Generate Invoice</button>
-  </form>
-</body>
-</html>
+    <fieldset>
+      <legend>Client Info</legend>
+      <label>Client Name:
+        <input type="text" name="client_name" required>
+      </label>
+      <label>Client Email:
+        <input type="email" name="client_email" required>
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Invoice Details</legend>
+      <label>Invoice #:
+        <input type="text" name="invoice_number" value="001">
+      </label>
+      <label>Date:
+        <input type="date" name="date" value="{{ today }}">
+      </label>
+      <label>Due Date:
+        <input type="date" name="due_date" value="{{ due }}">
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Line Items</legend>
+      <div>
+        <label>Description:
+          <input type="text" name="item_description_1" placeholder="Service">
+        </label>
+        <label>Hours:
+          <input type="number" name="item_hours_1" value="1" step="0.1">
+        </label>
+        <label>Rate ($):
+          <input type="number" name="item_rate_1" value="50" step="0.01">
+        </label>
+      </div>
+      <div style="margin-top:1rem">
+        <label>Description (optional):
+          <input type="text" name="item_description_2" placeholder="Service">
+        </label>
+        <label>Hours:
+          <input type="number" name="item_hours_2" value="
