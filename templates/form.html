@@ -4,14 +4,11 @@
   <meta charset="UTF-8">
   <title>Pay Day – Invoice Generator</title>
   <!-- Bootstrap 5 -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
-  <!-- PayPal SDK – replace YOUR_CLIENT_ID below -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background-color: #f8f9fa; }
+    body {
+      background-color: #f8f9fa;
+    }
     .invoice-card {
       max-width: 700px;
       margin: 2rem auto;
@@ -20,11 +17,9 @@
       border-radius: .5rem;
       box-shadow: 0 0 .5rem rgba(0,0,0,.1);
     }
-    .logo { max-height: 50px; margin-bottom: 1rem; }
-    /* start disabled: gray out & block clicks */
-    #invoice-form.disabled {
-      opacity: 0.6;
-      pointer-events: none;
+    .logo {
+      max-height: 50px;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -33,15 +28,13 @@
     <div class="text-center mb-4">
       <img src="/static/logo.png" alt="Pay Day Logo" class="logo">
       <h2>Invoice Generator</h2>
-      <!-- PayPal Button Container -->
-      <div id="paypal-button-container" class="mb-3"></div>
-      <div id="paid-msg" class="text-success mb-3" style="display:none;">
-        ✅ Payment received! You can now fill out the form below.
-      </div>
+      <!-- PayPal.me “Pay Now” button -->
+      <a href="https://paypal.me/BenDeHan" target="_blank" class="btn btn-success mb-3">
+        💵 Pay Now via PayPal
+      </a>
     </div>
-
-    <!-- Invoice Form starts DISABLED -->
-    <form id="invoice-form" class="disabled" action="/" method="post">
+    
+    <form action="/" method="post">
       <!-- Your Info -->
       <div class="card mb-3">
         <div class="card-header">Your Info</div>
@@ -56,7 +49,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Client Info -->
       <div class="card mb-3">
         <div class="card-header">Client Info</div>
@@ -71,7 +64,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Invoice Details -->
       <div class="card mb-3">
         <div class="card-header">Invoice Details</div>
@@ -90,7 +83,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Line Items -->
       <div class="card mb-3">
         <div class="card-header">Line Items</div>
@@ -125,7 +118,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Notes & Payment Info -->
       <div class="card mb-3">
         <div class="card-header">Notes & Payment Info</div>
@@ -140,32 +133,14 @@
           </div>
         </div>
       </div>
-
+      
       <div class="text-center">
         <button type="submit" class="btn btn-primary btn-lg">Generate Invoice</button>
       </div>
     </form>
   </div>
-
-  <script>
-    // Render the PayPal button
-    paypal.Buttons({
-      style: { layout: 'horizontal' },
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [{ amount: { value: '10.00' } }]
-        });
-      },
-      onApprove: (data, actions) => {
-        return actions.order.capture().then(() => {
-          // Enable the form
-          const form = document.getElementById('invoice-form');
-          form.classList.remove('disabled');
-          document.getElementById('paid-msg').style.display = 'block';
-          form.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-    }).render('#paypal-button-container');
-  </script>
+  
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
